@@ -32,9 +32,9 @@ $('#openmasseHelp').css({
 });
 // Add behaviour to help
 $('#openmasseHelp').mouseover(function() {
-    if ($('#openmasseHelp').position().left == 0)
+    if ($('#openmasseHelp').position().left === 0)
     {
-        $('#openmasseHelp').css({'left':'auto','right':'0'})
+        $('#openmasseHelp').css({'left':'auto','right':'0'});
     }
     else
     {
@@ -105,7 +105,7 @@ $('html').mousedown(function(event){
 
     });
 });
-$('html').click(function(event){event.preventDefault()});
+$('html').click(function(event){event.preventDefault();});
 $('html').mouseup(function(event){
     event.preventDefault();
     console.log('dragging stopped at x=' + event.pageX +',y=' + event.pageY);
@@ -114,7 +114,7 @@ $('html').mouseup(function(event){
     $('html').unbind('mousemove');
     $('#openmasseBox').remove();
     // Open Links
-    var links = new Array();
+    var links = [];
     $('a').each(function(){
         // ugly as fuck...
         if (
@@ -147,5 +147,8 @@ $('html').keydown(function(){
         $('html').unbind('mouseup');
         $('html').unbind('click');
         $('#openmasseHelp').remove();
+        // Necessary if ESC is pressed while dragging the box
+        $('html').unbind('mousemove');
+        $('#openmasseBox').remove();
     }
 });
