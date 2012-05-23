@@ -152,3 +152,99 @@ $('html').keydown(function(){
         $('#openmasseBox').remove();
     }
 });
+
+
+/* helpText = "Drag a box over the set of links you wish to open (press ESC to abort)."
+$("body").append "<div id=\"openmasseHelp\">" + helpText + "</div>"
+$("#openmasseHelp").css
+  "background-color": "lightgrey"
+  position: "fixed"
+  top: "0"
+  left: "0"
+  width: 200
+
+$("#openmasseHelp").mouseover ->
+  if $("#openmasseHelp").position().left is 0
+    $("#openmasseHelp").css
+      left: "auto"
+      right: "0"
+  else
+    $("#openmasseHelp").css
+      right: "auto"
+      left: "0"
+
+from = undefined
+to = undefined
+$("html").mousedown (event) ->
+  event.preventDefault()
+  console.log "dragging started at x=" + event.pageX + ",y=" + event.pageY
+  from =
+    x: event.pageX
+    y: event.pageY
+
+  $("body").append "<div id=\"openmasseBox\"></div>"
+  $("#openmasseBox").css
+    "background-color": "grey"
+    opacity: 0.5
+    position: "absolute"
+    top: event.pageY
+    left: event.pageX
+    width: 0
+    height: 0
+
+  $("html").mousemove (eventmove) ->
+    if eventmove.pageX >= from.x and eventmove.pageY >= from.y
+      $("#openmasseBox").css
+        top: from.y
+        left: from.x
+        width: eventmove.pageX - from.x
+        height: eventmove.pageY - from.y
+    else if eventmove.pageX >= from.x and eventmove.pageY <= from.y
+      $("#openmasseBox").css
+        top: eventmove.pageY
+        left: from.x
+        width: eventmove.pageX - from.x
+        height: from.y - eventmove.pageY
+    if eventmove.pageX <= from.x and eventmove.pageY >= from.y
+      $("#openmasseBox").css
+        top: from.y
+        left: eventmove.pageX
+        width: from.x - eventmove.pageX
+        height: eventmove.pageY - from.y
+    if eventmove.pageX <= from.x and eventmove.pageY <= from.y
+      $("#openmasseBox").css
+        top: eventmove.pageY
+        left: eventmove.pageX
+        width: from.x - eventmove.pageX
+        height: from.y - eventmove.pageY
+
+$("html").click (event) ->
+  event.preventDefault()
+
+$("html").mouseup (event) ->
+  event.preventDefault()
+  console.log "dragging stopped at x=" + event.pageX + ",y=" + event.pageY
+  to =
+    x: event.pageX
+    y: event.pageY
+
+  $("html").unbind "mousemove"
+  $("#openmasseBox").remove()
+  links = []
+  $("a").each ->
+    links.push $(this).attr("href")  if (from.x <= $(this).offset().left + $(this).width() and to.x >= $(this).offset().left) or (from.x >= $(this).offset().left and to.x <= $(this).offset().left + $(this).width()) and (from.y <= $(this).offset().top + $(this).height() and to.y >= $(this).offset().top) or (from.y >= $(this).offset().top and to.y <= $(this).offset().top + $(this).height())
+
+  if links.length > 0
+    links = $.uniqueArray(links)
+    console.log links
+  $.each links, (index, value) ->
+    window.open value
+
+$("html").keydown ->
+  if event.keyCode is "27"
+    $("html").unbind "mousedown"
+    $("html").unbind "mouseup"
+    $("html").unbind "click"
+    $("#openmasseHelp").remove()
+    $("html").unbind "mousemove"
+    $("#openmasseBox").remove() */
