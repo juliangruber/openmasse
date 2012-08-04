@@ -65,15 +65,22 @@
     var links = document.getElementsByTagName('a');
     for (var i = 0, length = links.length; i < length; i++) {
       var rect = links[i].getClientRects()[0];
-      if (typeof rect != 'undefined') {
-        var fromLeft = from.x <= rect.left+rect.width && e.pageX >= rect.left;
-        var fromRight = from.x >= rect.left && e.pageX <= rect.left+rect.width;
-        var fromBelow = from.y <= rect.top+rect.height && e.pageY >= rect.top;
-        var fromAbove = from.y >= rect.top && e.pageY <= rect.top+rect.height;
-        var isNew = urls.indexOf(links[i].href) == -1;
-        if ((fromLeft || fromRight) && (fromBelow || fromAbove) && isNew) {
-          urls.push(links[i].href);
-        }
+      var left = 0;
+      var top = 0;
+      // Find Offset
+      var el = links[i];
+      do {
+        left += el.offsetLeft;
+        top += el.offsetTop;
+      } while (el = el.offsetParent);
+      // Hit detection
+      var fromLeft = from.x <= left+rect.width && e.pageX >= left;
+      var fromRight = from.x >= left && e.pageX <= left+rect.width;
+      var fromBelow = from.y <= top+rect.height && e.pageY >= top;
+      var fromAbove = from.y >= top && e.pageY <= top+rect.height;
+      var isNew = urls.indexOf(links[i].href) == -1;
+      if ((fromLeft || fromRight) && (fromBelow || fromAbove) && isNew) {
+        urls.push(links[i].href);
       }
     }
     // open links
