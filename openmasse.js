@@ -64,7 +64,6 @@
     var urls = [];
     var links = document.getElementsByTagName('a');
     for (var i = 0, length = links.length; i < length; i++) {
-      var rect = links[i].getClientRects()[0];
       var left = 0;
       var top = 0;
       // Find Offset
@@ -74,10 +73,10 @@
         top += el.offsetTop;
       } while (el = el.offsetParent);
       // Hit detection
-      var fromLeft = from.x <= left+rect.width && e.pageX >= left;
-      var fromRight = from.x >= left && e.pageX <= left+rect.width;
-      var fromBelow = from.y <= top+rect.height && e.pageY >= top;
-      var fromAbove = from.y >= top && e.pageY <= top+rect.height;
+      var fromLeft = from.x <= left+links[i].offsetWidth && e.pageX >= left;
+      var fromRight = from.x >= left && e.pageX <= left+links[i].offsetWidth;
+      var fromBelow = from.y <= top+links[i].offsetHeight && e.pageY >= top;
+      var fromAbove = from.y >= top && e.pageY <= top+links[i].offsetHeight;
       var isNew = urls.indexOf(links[i].href) == -1;
       if ((fromLeft || fromRight) && (fromBelow || fromAbove) && isNew) {
         urls.push(links[i].href);
