@@ -65,13 +65,15 @@
     var links = document.getElementsByTagName('a');
     for (var i = 0, length = links.length; i < length; i++) {
       var rect = links[i].getClientRects()[0];
-      var fromLeft = from.x <= rect.left+rect.width && e.pageX >= rect.left;
-      var fromRight = from.x >= rect.left && e.pageX <= rect.left+rect.width;
-      var fromBelow = from.y <= rect.top+rect.height && e.pageY >= rect.top;
-      var fromAbove = from.y >= rect.top && e.pageY <= rect.top+rect.height;
-      var isNew = urls.indexOf(links[i].href) == -1;
-      if ((fromLeft || fromRight) && (fromBelow || fromAbove) && isNew) {
-        urls.push(links[i].href);
+      if (typeof rect != 'undefined') {
+        var fromLeft = from.x <= rect.left+rect.width && e.pageX >= rect.left;
+        var fromRight = from.x >= rect.left && e.pageX <= rect.left+rect.width;
+        var fromBelow = from.y <= rect.top+rect.height && e.pageY >= rect.top;
+        var fromAbove = from.y >= rect.top && e.pageY <= rect.top+rect.height;
+        var isNew = urls.indexOf(links[i].href) == -1;
+        if ((fromLeft || fromRight) && (fromBelow || fromAbove) && isNew) {
+          urls.push(links[i].href);
+        }
       }
     }
     // open links
