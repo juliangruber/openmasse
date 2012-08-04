@@ -79,7 +79,7 @@
   };
   
   document.onkeydown = function(e) {
-    if (e.keyCode === '27') {
+    if (e.keyCode === 27) {
       // Tidy up
       document.onmousedown = null;
       document.onmouseup = null;
