@@ -6,9 +6,9 @@
    <title>Test</title>
    
 </head>
-<body>
+<body onload="javascript:(function(){document.body.appendChild(document.createElement('script')).src='openmasse.js?'+Date.now();})();">
 
-   <a href="javascript:(function(){document.body.appendChild(document.createElement('script')).src='openmasse.js';})();">OpenMassé</a>
+   <a href="javascript:(function(){document.body.appendChild(document.createElement('script')).src='openmasse.js?'+Date.now();})();">OpenMassé</a>
 
    <h1>Test</h1>
    <ul>
